@@ -1,7 +1,3 @@
-
-
-
-
 import java.util.Scanner;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -9,22 +5,16 @@ import java.net.http.HttpResponse;
 import java.net.URI;
 
 public class task42 {
-
-    // Replace with your actual API key from exchangerate-api.com
-    private static final String API_KEY = "defd091010763aed7985e161";  // <-- PUT YOUR KEY HERE
+    private static final String API_KEY = "";
     private static final String API_URL = "https://api.exchangerate-api.com/v4/latest/";
 
     private static Scanner scanner = new Scanner(System.in);
     private static HttpClient client = HttpClient.newHttpClient();
 
     public static void main(String[] args) {
-
-
-        
     System.out.println("[DEBUG] Starting program...");
     
     try {
-        // Try to fetch rate
         double testRate = getExchangeRate("USD", "INR");
         System.out.println("[DEBUG] Successfully fetched rate: " + testRate);
         System.out.println("[DEBUG] Mode: REAL-TIME API");
@@ -32,8 +22,6 @@ public class task42 {
         System.out.println("[DEBUG] API failed: " + e.getMessage());
         System.out.println("[DEBUG] Mode: STATIC FALLBACK");
     }
-    
-    // ... rest of your code
 
         System.out.println("=".repeat(60));
         System.out.println("        CURRENCY CONVERTER (Real‑time)");
@@ -71,14 +59,11 @@ public class task42 {
     }
 
     private static double getExchangeRate(String base, String target) throws Exception {
-        // Build the request URL
         String url = API_URL + base + "?apikey=" + API_KEY;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .build();
-
-        // Send request and get response
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
@@ -86,9 +71,6 @@ public class task42 {
         }
 
         String json = response.body();
-
-        // Manually extract the rate for the target currency from the JSON
-        // The JSON looks like: {"rates":{"USD":1,"EUR":0.92,"INR":83.5,...}}
         String searchKey = "\"" + target + "\":";
         int idx = json.indexOf(searchKey);
         if (idx == -1) {
