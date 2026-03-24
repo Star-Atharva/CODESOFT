@@ -1,8 +1,4 @@
-
-
 import java.util.Scanner;
-
-// Bank Account Class
 class BankAccount {
     private double balance;
 
@@ -34,13 +30,11 @@ class BankAccount {
         }
     }
 }
-
-// ATM Class
 public class ATM {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        BankAccount account = new BankAccount(1000); // Initial balance
+        BankAccount account = new BankAccount(1000);
 
         int choice;
 
